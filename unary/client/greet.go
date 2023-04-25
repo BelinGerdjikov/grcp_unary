@@ -10,12 +10,14 @@ import (
 func doGreet(c pb.GreetServiceClient) {
 	log.Printf("doGreet was invoked")
 	res, err := c.Greet(context.Background(), &pb.GreetRequest{
-		FirstName: "Clement",
+		Domain: "Belin",
 	})
 
 	if err != nil {
 		log.Fatalf("Could not greet: %v\n", err)
 	}
 
-	log.Printf("Greeting %s\n", res.Result)
+	speed := res.Speed.AsDuration()
+
+	log.Println("Domains:", res.AllDomains, "\n Speed", speed)
 }
